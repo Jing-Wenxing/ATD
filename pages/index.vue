@@ -48,6 +48,9 @@
 </template>
 
 <script>
+
+import { FILE_PREFIX } from "@/js/config"
+
 export default {
   data() {
     return {
@@ -56,7 +59,7 @@ export default {
       swiperList: [
         {
           id: "1",
-          img: "http://jingwenxing.top:9000/swiper/swiper_base.jpg",
+          img: FILE_PREFIX + "/swiper/swiper_base.jpg",
           url: null,
           title: "Welcome to ATD !",
           text: "欢迎大家加入ATD大家庭",

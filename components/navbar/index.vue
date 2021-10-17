@@ -117,7 +117,7 @@ export default {
           click: false,
           type: "href",
           open: true,
-          link: "http://p.harson.co/",
+          link: "http://pan.harson.co/1/main",
           path: "/resource",
         },
       ],
