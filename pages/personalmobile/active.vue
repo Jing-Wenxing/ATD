@@ -24,7 +24,6 @@
 
 <script>
 import yuyueActiveItemMobile from "@/components/active/yuyueActiveItemMobile.vue";
-import { API_PREFIX } from "@/js/config";
 
 export default {
   components: {
@@ -40,7 +39,7 @@ export default {
     axios.defaults.withCredentials = true;
     axios({
       method: "get",
-      url: API_PREFIX + "/api/uactive/personalYuyue",
+      url: "/api/uactive/personalYuyue",
     }).then((response) => {
       this.dataList = response.data.Result;
     });

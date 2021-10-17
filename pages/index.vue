@@ -1,6 +1,17 @@
 <template>
   <div class="index">
-    <div class="carousel-body">
+    <el-carousel trigger="click" height="100vh" arrow="always">
+      <el-carousel-item v-for="item in swiperList" :key="item.id">
+        <div class="swiper">
+          <img class="swiper-img" :src="item.img" />
+          <div class="swiper-content">
+            <h1>{{ item.title }}</h1>
+            <h2>{{ item.text }}</h2>
+          </div>
+        </div>
+      </el-carousel-item>
+    </el-carousel>
+    <!-- <div class="carousel-body">
       <div class="carousel-area">
         <div class="swiper">
           <img
@@ -32,13 +43,11 @@
           <div class="arrow iconfont icon-icon-test25" @click="next()"></div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { API_PREFIX, FILE_PREFIX } from "@/js/config";
-
 export default {
   data() {
     return {
@@ -47,7 +56,7 @@ export default {
       swiperList: [
         {
           id: "1",
-          img: FILE_PREFIX + "/swipers/swiper_base.jpg",
+          img: "http://jingwenxing.top:9000/swiper/swiper_base.jpg",
           url: null,
           title: "Welcome to ATD !",
           text: "欢迎大家加入ATD大家庭",
@@ -63,19 +72,19 @@ export default {
     axios.defaults.withCredentials = true;
     axios({
       method: "get",
-      url: API_PREFIX + "/api/swiper/selectFront",
+      url: "/api/swiper/selectFront",
     }).then((response) => {
       this.swiperList = response.data.Result;
 
       let swiperList = document.getElementsByClassName("swiper")[0];
       swiperList.style.width = this.swiperList.length * 100 + "vw";
 
-      this.indexChange();
+      // this.indexChange();
     });
 
     axios({
       method: "get",
-      url: API_PREFIX + "/api/user/profile",
+      url: "/api/user/profile",
     }).then((response) => {
       if (response.data.Status == 0) {
         this.$store.commit("loginNO");
@@ -106,23 +115,23 @@ export default {
       swiperList.style.transform =
         "translateX(-" + (this.index / this.swiperList.length) * 100 + "%)";
     },
-    indexChange() {
-      let carouselTool = document
-        .getElementsByClassName("carousel-tool")[0]
-        .querySelectorAll("li");
-      carouselTool[this.index].setAttribute("class", "is-active");
-    },
+    // indexChange() {
+    //   let carouselTool = document
+    //     .getElementsByClassName("carousel-tool")[0]
+    //     .querySelectorAll("li");
+    //   carouselTool[this.index].setAttribute("class", "is-active");
+    // },
   },
-  watch: {
-    index(val, oldVal) {
-      let carouselTool = document
-        .getElementsByClassName("carousel-tool")[0]
-        .querySelectorAll("li");
+  // watch: {
+  //   index(val, oldVal) {
+  //     let carouselTool = document
+  //       .getElementsByClassName("carousel-tool")[0]
+  //       .querySelectorAll("li");
 
-      carouselTool[oldVal].setAttribute("class", "");
-      carouselTool[val].setAttribute("class", "is-active");
-    },
-  },
+  //     carouselTool[oldVal].setAttribute("class", "");
+  //     carouselTool[val].setAttribute("class", "is-active");
+  //   },
+  // },
 };
 </script>
 
@@ -133,7 +142,7 @@ export default {
   background: rgb(56, 55, 55);
 }
 
-.carousel-body {
+/* .carousel-body {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -278,6 +287,73 @@ export default {
 
   .carousel-body .carousel-tool .center h2 {
     font-size: 22px;
+  }
+} */
+
+/* ===== */
+
+.swiper {
+  position: relative;
+}
+
+.swiper-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.swiper-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.swiper-content h1 {
+  font-size: 54px;
+  text-align: center;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+.swiper-content h2 {
+  margin: 0 20px;
+  max-width: 800px;
+  margin-top: 15px;
+  font-size: 32px;
+  font-weight: 400;
+  text-align: center;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+@media screen and (max-width: 600px) {
+  .swiper-content h1 {
+    font-size: 30px;
+    text-align: center;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    user-select: none;
+  }
+
+  .swiper-content h2 {
+    margin-top: 15px;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    user-select: none;
   }
 }
 </style>

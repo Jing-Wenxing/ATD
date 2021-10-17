@@ -8,8 +8,6 @@
 
 <script>
 import activeItemMobile from "@/components/active/activeItemMobile.vue";
-import { API_PREFIX } from "@/js/config";
-
 export default {
   components: {
     activeItemMobile,

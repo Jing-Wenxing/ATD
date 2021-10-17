@@ -11,8 +11,6 @@
 
 <script>
 import activeItem from "@/components/active/activeItem.vue";
-import { API_PREFIX } from "@/js/config";
-
 export default {
   components: {
     activeItem,
@@ -30,7 +28,7 @@ export default {
     axios.defaults.withCredentials = true;
     axios({
       method: "get",
-      url: API_PREFIX + "/api/active/all",
+      url: "/api/active/all",
     }).then((response) => {
       this.dataList = response.data.Result;
     });
