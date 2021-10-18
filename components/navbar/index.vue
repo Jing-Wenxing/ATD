@@ -105,13 +105,13 @@ export default {
           click: false,
           path: "/association",
         },
-        {
-          text: "相册",
-          click: false,
-          type: "href",
-          path: "/photo",
-          link: "/photo",
-        },
+        // {
+        //   text: "相册",
+        //   click: false,
+        //   type: "href",
+        //   path: "/photo",
+        //   link: "/photo",
+        // },
         {
           text: "资源",
           click: false,
